@@ -1,0 +1,6 @@
+﻿  Source.cpp
+c:\users\user\source\repos\lab10\lab10\source.cpp(9): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\user\source\repos\lab10\lab10\source.cpp(10): warning C4244: +=: преобразование "double" в "unsigned int", возможна потеря данных
+c:\users\user\source\repos\lab10\lab10\source.cpp(37): warning C4018: <: несоответствие типов со знаком и без знака
+  lab10.vcxproj -> C:\Users\User\source\repos\lab10\Debug\lab10.exe
+  lab10.vcxproj -> C:\Users\User\source\repos\lab10\Debug\lab10.pdb (Partial PDB)

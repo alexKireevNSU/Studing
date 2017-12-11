@@ -1,0 +1,153 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+
+using namespace std;
+
+
+void main() {
+	string orig;// начальное число
+	string orig_cell; // целая часть начального числа
+	string orig_float = "0"; // дробная часть начального числа
+	string cell_result; // результат для целой части
+	string float_result; // результат для целой части
+	int cell_decNum = 0; // целая часть началього числа в десятичном виде
+	double float_decNum = 0;// дробная часть началього числа в десятичном виде
+	int b1 = 0, b2 = 0;
+
+
+	ifstream fin("in.txt");
+	ofstream fout("out.txt");
+
+	fin >> b1 >> b2;
+	//проверяем введённые системы счисления на вшивость
+	if (b1 < 2 || b1 > 16 || b2 < 2 || b2 > 16) {
+		fout << "bad input";
+		return;
+	}
+	fin >> orig;
+	//записываем целую часть в один массив, дробную - в другой
+	bool isCell = true;
+	for (int i = 0; i < orig.length(); i++) {
+		//проверяем введённое число на вшивость
+		if (b1 < 11) {
+			if (orig[i] > b1 + '0' - 1 && orig[i] != '.')
+			{
+				fout << "bad input";
+				return;
+			}
+		}
+		else {
+			if (orig[i] > b1 + 54 && orig[i] != '.')
+			{
+				fout << "bad input";
+				return;
+			}
+		}
+		if (orig[i] == '.') {
+			isCell = false;
+			continue;
+		}
+		if (isCell == true) {
+			orig_cell += orig[i];
+		}
+		else {
+			orig_float += orig[i]; 
+		}
+	}
+	/*
+	переведём целую часть числа в десятичную систему счисления
+	*/
+	for (int i = 0; i < orig_cell.length(); i++)
+	{
+		//условие нужно для определения цифр > 9
+		if (orig_cell[i] <= 9 + '0' && orig_cell[i] >= 0 + '0') {
+			cell_decNum = cell_decNum*b1 + orig_cell[i] - '0';
+		}
+		else {
+			cell_decNum = cell_decNum*b1 + orig_cell[i] - 55;
+		}
+	}
+
+	/*
+	переведём дробную часть числа в десятичную систему счисления
+	*/
+	for (int i = orig_float.length()-1; i >= 0; i--)
+	{
+		if (orig_float[i] <= 9 + '0' && orig_float[i] >= 0 + '0') {
+			float_decNum = float_decNum / b1 + orig_float[i] - '0';
+		}
+		else {
+			float_decNum = float_decNum / b1 + orig_float[i] - 55;
+		}
+	}
+	/*
+	Весьма небезопасно использовать while(true)
+	переводим из десятичной записи в любую другую
+	*/
+	int iterationNumber = 0; //счётчик кол-ва цифр после запятой
+	while (true)
+	{
+		//если кол-во цифр полсле запятой > 12 или дробная часть стала равно нулю
+		//то выходим из цикла
+		if (iterationNumber >= 12 || float_decNum == 0) {
+			break;
+		}
+		//если цифра от 0 до 9 включительно, то пишем цифрами
+		if ((int)(float_decNum*b2) >= 0 && (int)(float_decNum*b2) <=9) {
+			float_result += (int)(float_decNum*b2) + '0';
+		}
+		/*fout << (int)(float_decNum*b2) << endl;
+		fout << float_result << endl;*/
+		//если цифра от A, то пишем английскими буквами верхнего регистра
+		if ((int)(float_decNum*b2) > 9) {
+			float_result += (int)(float_decNum*b2) + 'A' - 10;
+		}
+		//домножаем на основание новой системы счисления и отнимаем целую часть 
+		float_decNum = float_decNum*b2 - (int)(float_decNum*b2);
+		iterationNumber++;
+	}
+	/*
+	Весьма небезопасно использовать while(true)
+	переводим из десятичной записи в любую другую
+	*/
+	while (true) {
+		//если остаток от деления числа на b2 = 0 и 
+		//деление нацело на b2 = 0, то завершаем цикл
+		if (cell_decNum%b2 == 0 && cell_decNum / b2 == 0) {
+			break;
+		}
+		//если остаток от деления = от 0 до 9 включительно
+		//то к результату прибавляем цифру равную остатку
+		//работает только при askii кодеровке
+		if (cell_decNum%b2 < 10) {
+			cell_result += cell_decNum%b2 + '0';
+		}
+		//если остаток от деления больше 10 включительно
+		//тогда начинаем использовать английский алфавит верхнего регистра
+		else {
+			cell_result += cell_decNum%b2 + 'A' - 10;
+		}
+		//делим число нацело
+		cell_decNum = cell_decNum / b2;
+	}
+	//запишем результат в обратном порядке
+	for (int i = 0; i < cell_result.length()/2; i++){
+		char tmp;
+		tmp = cell_result[i];
+		cell_result[i] = cell_result[cell_result.length() - i - 1];
+		cell_result[cell_result.length() - i - 1] = tmp;
+	}
+	if (cell_result.length() > 0 && float_result.length() > 0) {
+		fout << cell_result << '.' << float_result;
+	}
+	if (cell_result.length() == 0 && float_result.length() > 0) {
+		fout << '0' << '.' << float_result;
+	}
+	if (cell_result.length() > 0 && float_result.length() == 0) {
+		fout << cell_result;
+	}
+	fin.close();
+	fout.close();
+}

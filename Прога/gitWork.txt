@@ -1,0 +1,5 @@
+git rm -r labs
+git status
+git commit .
+git pull
+gi push origin

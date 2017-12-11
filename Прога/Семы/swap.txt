@@ -1,0 +1,14 @@
+void swap(int *a, int *b){
+	*a^=*b; // *a = *a ^ *b; - xor
+	*b^=*a;
+	*a^=*b;
+}
+// ab    ab    ab    ab
+// 01 -> 11 -> 10 -> 10
+// ab    ab    ab    ab
+// 10 -> 10 -> 11 -> 01
+
+// для массива
+void swap(int *a, int *b, int n){
+	
+}

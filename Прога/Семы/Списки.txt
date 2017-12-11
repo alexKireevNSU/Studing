@@ -1,0 +1,117 @@
+// Абстрактный тип данных.
+// Список отличается от массива тем, что элементы списка расположены в памяти не по порядку.
+// Из-за этого легче добавлять в список элементы
+// Реализация:
+// 1й способ
+struct int_list{
+	int value;
+	struct int_list *next;
+};
+
+void reverse(struct int_list** start){
+	struct int_list *d. *e;
+	d = NULL;
+	while(start){
+		e = (*start)->next;
+		(*start)->next = d;
+		d = *start;
+		*start = e;
+	}
+	*start = d;
+}
+
+void find_Loop(struct int_list** start){
+	if(!start) return 0;
+	int_list *ptr1, *ptr2;
+	ptr1 = ptr2 = start;
+	while(true){
+		ptr1 = ptr1->next;
+		for(int i = 0; i < 2; ++i){
+			ptr2 = ptr2->next;
+		}
+		if(!ptr2) return 0;
+		if(ptr1 == ptr2) return 1;
+	}
+}
+
+void push(struct int_list **s ,int val){
+	struct int_list *top;
+	top = (struct int_list*)malloc(sizeof(struct int_list)); // top = (struct int_list*)malloc(*top);
+	top->next = *s;
+	top->value = val;
+	*s = top;
+}
+
+int main(){
+	struct int_list* stack;
+	stack = NULL;
+	push(&stack, 8);
+	push(&stack, 7;
+	push(&stack, 4);
+	printf("%d %d %d", stack->value, stack->next->value, stack->next->next->value);
+	for(int i = 0; i < 3; ++i){
+		printf("%d", stack->value);
+		h=h->next
+	}
+	return 0;
+}
+// struct int_list* (int length){
+	// struct int_list *s;
+	// s = (struct int_list*)malloc(sizeof(struct int_list));
+	// for(int i = 0; i < length - 1; ++i){
+		
+	// }
+// }
+
+// int main(){
+	// struct int_list *h = create(10); // список из 10 чисел
+	// h->value; // значение первого элемента в списке
+	// h->next->value; // значение второго элемента в списке
+	// h->next->next->value; // значение третьего элемента в списке
+// }
+
+
+//Слияние списков
+struct merge(const struct list *A, struct list *B){
+	struct list* AB = NULL;
+	while(A!=NULL && B!=NULL){
+		if(A->value < B->value){
+			A->next = AB;
+			AB = A;
+			A = A->next;
+		}
+		else{
+			B->next = AB;
+			AB=B;
+			B = B->next;
+		}
+	}
+	if(A==NULL){
+		A=B;
+	}
+	while(A!=NULL){
+		A->next = AB;
+		AB=A;
+		A=A->next;
+	}
+	return AB;
+}
+
+// разрезать список на две части
+
+void split(struct list*H, int b, struct list**small, struct list **big){
+	*small = NULL;
+	*bit = NULL;
+	for(;H!=NULL; H = H->next){
+		if(H->value < b){
+			H->next = *small;
+			*small = H;
+		}
+		else{
+			H->next = *big;
+			*big = H;
+		}
+	}
+}
+
+

@@ -1,0 +1,28 @@
+/*обратная польская запись
+1 2 + 3 * 4 5 - +*/
+struct binary_tree{
+	int val;
+	struct binary_tree *left, *right;
+};
+//сумма всех членов дерева
+int sum(struct binary_tree* tree){
+	if(tree){
+		return tree->val + sum(tree->left) + sum(tree->right);
+	}
+	else
+		return 0;
+}
+//найти предпоследний максимальный
+int get_second_max(const struct binary_tree* tree){
+	const struct binary_tree* previous = NULL;
+	while(tree->right){
+		previous = tree;
+		tree=tree->right;
+	}
+	if(tree->left){
+		tree=tree->left;
+		while(tree->right) tree=tree->right;
+		return tree->val;
+	}
+	return previous->val;
+}

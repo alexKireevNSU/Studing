@@ -1,0 +1,29 @@
+
+
+typedef
+enum{
+	BIRD,
+	CATTLE,
+	HUMAN;
+}living_entity_type_t;
+typedef
+struct{
+	double velocity;
+}bird_t;
+typedef
+struct{
+	enum{ARTICDACTYL, NONARTICDACTYL}dactyl;
+}cattle_t;
+typedef
+struct{
+	unsigned char IQ;
+}human_t;
+typedef
+struct{
+	living_entity_t type;
+	union{
+		bird_t bird;
+		cattle_t cattle;
+		human_t human;
+	}entity;
+}living_entity_t;
