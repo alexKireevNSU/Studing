@@ -1,0 +1,34 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+struct node {
+	int key;
+	unsigned char height;
+	struct node* left;
+	struct node* right;
+};
+unsigned char height(node* p) {
+	if (p) {
+		return p->height;
+	}
+	else {
+		return 0;
+	}
+}
+int balanceFactor(node* p) {
+	return height(p->left) - height(p->right);
+}
+void fixHeight(node* p) {
+	unsigned char leftHeight = height(p->left);
+	unsigned char rightHeight = height(p->right);
+	if (leftHeight > rightHeight) {
+		p->height = leftHeight + 1;
+	}
+	else {
+		p->height = rightHeight + 1;
+	}
+}
+int main() {
+
+	return 0;
+ }
