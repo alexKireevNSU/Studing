@@ -4,12 +4,12 @@
 // Реализация:
 // 1й способ
 struct int_list{
-	int value;
+	int value; // тип данных для описания типов данных
 	struct int_list *next;
 };
 
 void reverse(struct int_list** start){
-	struct int_list *d. *e;
+	struct int_list *d, *e;
 	d = NULL;
 	while(start){
 		e = (*start)->next;
