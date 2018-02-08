@@ -1,0 +1,12 @@
+FILE* inStream = fopen("in.txt", "r");
+
+	int sdvig;
+	fscanf(inStream, "%d", &sdvig);
+	char ch = 'z';
+	while (sdvig < 0) sdvig += 26;
+	if (ch + sdvig % ('z' - 'a' + 1) <= 'z')
+		printf("%c", ch + sdvig % ('z' - 'a' + 1));
+	else
+		printf("%c", ch + sdvig % ('z' - 'a' + 1) - 'z' + 'a' - 1);
+	system("pause");
+	//salat
