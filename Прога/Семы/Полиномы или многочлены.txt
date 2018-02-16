@@ -1,0 +1,21 @@
+// Перемножение двух полиномов
+struct poly* multiply(struct poly first, struct poly second){
+	struct poly result = (struct)malloc(sizeof(struct poly));
+	result->n = first->n + second->n - 1;
+	result->m = first->m + second->m - 1;
+	float *table = (float*)malloc(sizeof(float)*result->n*result->m);
+	for(int i = 0; i < result->n*result->m; ++i){
+		table[i] = 0;
+	}
+	for(int i = 0; i < first->n; ++i){
+		for(int j = 0; j < first->m; ++j){
+			for(int k = 0; k < second->n; ++k){
+				for(int l = 0; l < second->m; ++l){
+					table[result->m*(i+k)+j+l] += first->table[first->m*i+j] * second->table[second->m*k+l];
+				}
+			}
+		}
+	}
+	result->table = table;
+	return result;
+}
