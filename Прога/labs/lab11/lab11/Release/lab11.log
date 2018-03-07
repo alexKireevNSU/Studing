@@ -1,8 +1,0 @@
-﻿  Source.cpp
-Source.cpp(112): warning C4244: =: преобразование "double" в "int", возможна потеря данных
-  Создание кода
-  2 of 16 functions (12.5%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Создание кода завершено
-  lab11.vcxproj -> C:\Users\User\source\repos\lab11\Release\lab11.exe
