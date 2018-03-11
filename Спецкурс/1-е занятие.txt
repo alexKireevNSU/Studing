@@ -14,3 +14,4 @@ e-maxx.ru/algo
 
 // Автомат по проге = городская олимпиада
 codeforces.ru - сайт контестов для тренировки
+cppreference.com
