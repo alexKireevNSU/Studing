@@ -1,0 +1,149 @@
+//Графы
+//Кратчайшие пути
+//По числу рёбер
+//Обход в ширину
+//Аналогия с *поджиганием графа*
+//V - не обработанные вершины
+//V1 - в обработке
+//V2 - обработанные
+
+int g[n][n];
+queue<int> q;
+int dist[n];
+
+void bfs(int s){
+	for(int i = 0; i < n; ++i){
+		dist[i] = n;
+	}
+	dist[s] = 0;
+	q.push(s);
+	while(!q.empty()){
+		int v = q.front();
+		q.pop();
+		for(int u = 0; u < n; ++u){
+			if( g[v][u] && dist[u] == n)
+			{
+				dist[u] = dist[v] + 1;
+				q.push(u);
+			}
+		}
+	}
+}
+
+//Списки смежности
+
+vector<int> g[n];
+queue<int> q;
+int dist[n];
+
+void bfs(int s){
+	for(int i = 0; i < n; ++i){
+		dist[i] = n;
+	}
+	dist[s] = 0;
+	q.push(s);
+	while(!q.empty()){
+		int v = q.front();
+		q.pop();
+		for(int i = 0; i < g[v].size(); ++i){     =     for(int u:g[v])
+			int u = g[v][i];
+			if( g[v][u] && dist[u] == n)
+			{
+				dist[u] = dist[v] + 1;
+				q.push(u);
+			}
+		}
+	}
+}
+
+//Кратчайший путь во взвешенном графе
+// w: E->R
+//Алгоритм Дейкстра
+
+struct Edge{
+	int to;
+	int weight;
+};
+
+vector<Edge> g[n];
+queue<int> q;
+int dist[n];
+bool used[n];
+
+void Dijkstra(int s){
+	for(int i = 0; i < n; ++i){
+		dist[i] = n;
+	}
+	dist[s] = 0;
+	q.push(s);
+	while(!q.empty()){
+		int v = q.front();
+		q.pop();
+		used[v] = true;
+		for(int i = 0; i < g[v].size(); ++i){
+			int u = g[v][i].to;
+			int t = dist[v] + g[v][i].weight;
+			if(t < dist[u]){
+				dist[u] = t;
+				q.push(u);
+			}
+		}
+	}
+}
+
+//Очередь с приоритетами
+
+struct Edge{
+	int to;
+	int weight;
+};
+
+vector<Edge> g[n];
+priority_queue<pair<int, int>> q;
+int dist[n];
+bool used[n];
+
+void Dijkstra(int s){
+	for(int i = 0; i < n; ++i){
+		dist[i] = n;
+	}
+	dist[s] = 0;
+	q.push({0, s}); // или q.push(make_pair(0, s));
+	while(!q.empty()){
+		int v = q.front().second;
+		q.pop();
+		if(used[v]) continue;
+		used[v] = true;
+		for(int i = 0; i < g[v].size(); ++i){
+			int u = g[v][i].to;
+			int t = dist[v] + g[v][i].weight;
+			if(t < dist[u]){
+				dist[u] = t;
+				q.push({t, u});
+			}
+		}
+	}
+}
+
+//A - star алгоритм A*
+// оценка расстояния снизу
+
+//Алгоритм Форда - Беллмана
+// Циклы отрицательного веса - плохо
+int dist[];
+vector<Edge> g[n];
+void ford(int s){
+	for(...) dist[i] = infinity;
+	dist[s] = 0;
+	for(int a = 0; a < n; ++a){
+		for(int v = 0; v < n, ++v){
+			for(int i = 0; i < g[v].size(); ++i){
+				int u = g[v][i].to;
+				int w = g[v][i].weight;
+				if(dist[v] + w < dist[u])
+					dist[u] = dist[v] + w;
+			}
+		}
+	}
+}
+
