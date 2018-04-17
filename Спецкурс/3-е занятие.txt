@@ -1,0 +1,15 @@
+//http://neerc.secna.ru/ALTAI_U/
+//ax + by = c
+//
+//Найти нод
+int GCD(int a, int b)
+while (b>0){
+	a = a%b;
+	swap(a,b);
+}
+return a;
+
+//Решить диафантовое уравнение
+//Выучить сортировки
+//segment tree - хранить как полное бинарное дерево
+//
